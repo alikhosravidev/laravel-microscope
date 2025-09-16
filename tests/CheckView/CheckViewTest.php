@@ -13,7 +13,8 @@ class CheckViewTest extends TestCase
 {
     public function testCheckView()
     {
-        View::swap(new class {
+        View::swap(new class
+        {
             public function exists()
             {
                 return false;

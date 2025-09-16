@@ -26,7 +26,6 @@ class EnforceImportsTest extends TestCase
 
             return $imports[0] ?: [$imports[1]];
         }, function ($err) {
-
         });
         $result = EnforceImports::performCheck(
             PhpFileDescriptor::make(__DIR__.DIRECTORY_SEPARATOR.'imports.temp')

@@ -24,18 +24,18 @@ class CheckFqcnTest extends TestCase
     {
         $result = ExtraFQCN::performCheck(PhpFileDescriptor::make(__DIR__.'/fqcn.temp'), [
             self::useStatementParser(),
-            true
+            true,
         ]);
 
         $actual = file_get_contents(__DIR__.'/fqcn.temp');
         $expected = file_get_contents(__DIR__.'/fqcn-expected.stub');
         $this->assertEquals($expected, $actual);
         $this->assertCount(5, ErrorPrinter::singleton()->errorsList['FQCN']);
-        $this->assertStringContainsString('\C\E', (ErrorPrinter::singleton()->errorsList['FQCN'][0])->getErrorData());
-        $this->assertStringContainsString('\C\E', (ErrorPrinter::singleton()->errorsList['FQCN'][1])->getErrorData());
-        $this->assertStringContainsString('\C\E', (ErrorPrinter::singleton()->errorsList['FQCN'][2])->getErrorData());
-        $this->assertStringContainsString('\He\R\T\U2', (ErrorPrinter::singleton()->errorsList['FQCN'][3])->getErrorData());
-        $this->assertStringContainsString('\He\R\T\Hh can be replaced with: G', (ErrorPrinter::singleton()->errorsList['FQCN'][4])->getErrorData());
+        $this->assertStringContainsString('\C\E', ErrorPrinter::singleton()->errorsList['FQCN'][0]->getErrorData());
+        $this->assertStringContainsString('\C\E', ErrorPrinter::singleton()->errorsList['FQCN'][1]->getErrorData());
+        $this->assertStringContainsString('\C\E', ErrorPrinter::singleton()->errorsList['FQCN'][2]->getErrorData());
+        $this->assertStringContainsString('\He\R\T\U2', ErrorPrinter::singleton()->errorsList['FQCN'][3]->getErrorData());
+        $this->assertStringContainsString('\He\R\T\Hh can be replaced with: G', ErrorPrinter::singleton()->errorsList['FQCN'][4]->getErrorData());
         $this->assertEquals(true, $result);
     }
 
