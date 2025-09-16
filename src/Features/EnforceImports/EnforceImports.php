@@ -44,7 +44,7 @@ class EnforceImports implements Check
      */
     private static $cacheKey = 'EnforceImports';
 
-    private static function performCheck(PhpFileDescriptor $file): bool
+    public static function performCheck(PhpFileDescriptor $file): bool
     {
         $tokens = $file->getTokens();
         $absFilePath = $file->getAbsolutePath();

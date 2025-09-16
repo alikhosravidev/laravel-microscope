@@ -18,7 +18,7 @@ class CheckView implements Check
      */
     private static $cacheKey = 'check_view_command';
 
-    private static function performCheck(PhpFileDescriptor $file): bool
+    public static function performCheck(PhpFileDescriptor $file): bool
     {
         return self::checkViewCalls($file, [
             'View' => ['make', 0],

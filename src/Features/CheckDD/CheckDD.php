@@ -18,7 +18,7 @@ class CheckDD implements Check
      */
     private static $cacheKey = 'check_dd_command';
 
-    private static function performCheck(PhpFileDescriptor $file): bool
+    public static function performCheck(PhpFileDescriptor $file): bool
     {
         $tokens = $file->getTokens();
         $callback = self::$onErrorCallback;

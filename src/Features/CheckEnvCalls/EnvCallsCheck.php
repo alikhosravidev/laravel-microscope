@@ -12,14 +12,16 @@ class EnvCallsCheck implements Check
 {
     use CachedCheck;
 
+    public static $onErrorCallback;
+
     /**
      * @var string
      */
     private static $cacheKey = 'env_calls_command';
 
-    private static function performCheck(PhpFileDescriptor $file, $params): bool
+    public static function performCheck(PhpFileDescriptor $file): bool
     {
-        $onErrorCallback = $params[0];
+        $onError = self::$onErrorCallback;
         $absPath = $file->getAbsolutePath();
         $tokens = $file->getTokens();
 
@@ -27,7 +29,7 @@ class EnvCallsCheck implements Check
         foreach ($tokens as $i => $token) {
             if ($index = FunctionCall::isGlobalCall('env', $tokens, $i)) {
                 if (! self::isLikelyConfigFile($absPath, $tokens)) {
-                    $onErrorCallback($tokens[$index][1], $absPath, $tokens[$index][2]);
+                    $onError($tokens[$index][1], $absPath, $tokens[$index][2]);
                     $hasError = true;
                 }
             }

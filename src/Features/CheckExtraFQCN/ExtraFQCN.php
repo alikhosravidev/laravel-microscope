@@ -18,7 +18,7 @@ class ExtraFQCN implements Check
      */
     private static $cacheKey = 'extra_fqcn';
 
-    private static function performCheck(PhpFileDescriptor $file, $params): bool
+    public static function performCheck(PhpFileDescriptor $file, $params): bool
     {
         $fix = $params[1];
         $tokens = $file->getTokens();
